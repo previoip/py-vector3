@@ -141,28 +141,28 @@ class TestPointArithmetics(BaseSetup, unittest.TestCase):
         self.assertAlmostEqual(point.len, 3.7416573867739413)
 
     def test_point_arithmetic_neg(self):
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point2 = Point(-x, -y, -z)
         point = -point
         self.assertEqual(point, point2)
 
     def test_point_arithmetic_inv(self):
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point2 = Point(-x, -y, -z)
         point = ~point
         self.assertEqual(point, point2)
 
     def test_point_arithmetic_pos(self):
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point2 = Point(x, y, z)
         point = +point
         self.assertEqual(point, point2)
 
     def test_point_arithmetic_add_self(self):
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point2 = Point(x, y, z)
         point = point + point2
@@ -178,7 +178,7 @@ class TestPointArithmetics(BaseSetup, unittest.TestCase):
         self.assertEqual(point.z, z+z)
 
     def test_point_arithmetic_add_int_float(self):
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point = point + self.rand_val
         self.assertEqual(point.x, x+self.rand_val)
@@ -193,7 +193,7 @@ class TestPointArithmetics(BaseSetup, unittest.TestCase):
 
         self.rand_val = int(self.rand_val)
 
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point = point + self.rand_val
         self.assertEqual(point.x, x+self.rand_val)
@@ -208,7 +208,7 @@ class TestPointArithmetics(BaseSetup, unittest.TestCase):
 
 
     def test_point_arithmetic_sub_self(self):
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point2 = Point(x, y, z)
         point = point - point2
@@ -224,7 +224,7 @@ class TestPointArithmetics(BaseSetup, unittest.TestCase):
         self.assertEqual(point.z, z-z)
 
     def test_point_arithmetic_sub_int_float(self):
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point = point - self.rand_val
         self.assertEqual(point.x, x-self.rand_val)
@@ -239,7 +239,7 @@ class TestPointArithmetics(BaseSetup, unittest.TestCase):
 
         self.rand_val = int(self.rand_val)
 
-        x, y, z = self.const_pairs
+        x, y, z = self.rand_pairs
         point = Point(x, y, z)
         point = point - self.rand_val
         self.assertEqual(point.x, x-self.rand_val)
@@ -252,6 +252,30 @@ class TestPointArithmetics(BaseSetup, unittest.TestCase):
         self.assertEqual(point.y, y-self.rand_val)
         self.assertEqual(point.z, z-self.rand_val)
 
+    def test_point_arithmetic_mul_and_dot_product(self):
+        x, y, z = self.const_pairs
+        point = Point(x, y, z)
+        point2 = Point(x, y, z)
+        val = point * point2
+        self.assertAlmostEqual(val, 14.0)
+
+        point = Point(x, y, z)
+        point = point * self.rand_val
+        self.assertAlmostEqual(point.x, x*self.rand_val)
+        self.assertAlmostEqual(point.y, y*self.rand_val)
+        self.assertAlmostEqual(point.z, z*self.rand_val)
+
+    def test_point_arithmetic_div(self):
+        x, y, z = self.rand_pairs
+
+        point = Point(x, y, z)
+        point = point / self.rand_val
+        self.assertAlmostEqual(point.x, x/self.rand_val)
+        self.assertAlmostEqual(point.y, y/self.rand_val)
+        self.assertAlmostEqual(point.z, z/self.rand_val)
+
+class TestPointErrors(BaseSetup, unittest.TestCase):
+    pass
 
 if __name__ == '__main__':
     unittest.main()
