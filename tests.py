@@ -1,5 +1,6 @@
 import unittest, random
-from Vector3 import Point, Vector3
+from Vector3 import Vector3
+from Point import Point
 
 class BaseSetup:
     def setUp(self):
